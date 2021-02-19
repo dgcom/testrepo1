@@ -10,18 +10,17 @@ Create empty folder tree
 
 Alternatively, create folders manually, here is an example with the rpm already built:
 
-   $ tree --charset=ascii rpmbuild/
-   rpmbuild/
-   |-- BUILD
-   |-- BUILDROOT
-   |-- RPMS
-   |   `-- x86_64
-   |       `-- testrpm-1.0-1.el7.x86_64.rpm
-   |-- SOURCES
-   |-- SPECS
-   |   `-- testpkg.spec
-   `-- SRPMS
-
+    $ tree --charset=ascii rpmbuild/
+    rpmbuild/
+    |-- BUILD
+    |-- BUILDROOT
+    |-- RPMS
+    |   `-- x86_64
+    |       `-- testrpm-1.0-1.el7.x86_64.rpm
+    |-- SOURCES
+    |-- SPECS
+    |   `-- testpkg.spec
+    `-- SRPMS
 
 Create template .spec file
 
