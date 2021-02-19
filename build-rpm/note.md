@@ -31,5 +31,7 @@ Uninstall package
 
 # Links
 [How to create a Linux RPM package | Enable Sysadmin](https://www.redhat.com/sysadmin/create-rpm-package)
+
 [How to create an rpm package - LinuxConfig.org](https://linuxconfig.org/how-to-create-an-rpm-package)
+
 [Scriptlets :: Fedora Docs](https://docs.fedoraproject.org/en-US/packaging-guidelines/Scriptlets/#_syntax)
