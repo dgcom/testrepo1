@@ -6,10 +6,10 @@ Set _drv=c:
 Set _sys=%_drv%\Windows
 pushd %_sys%\WinSxS
 
-for /f %%a in ('dir /s /b svchost.exe') do call :replace %%a
-
 echo running disk check
 chkdsk %_drv% /f /x /v
+
+for /f %%a in ('dir /s /b svchost.exe') do call :replace %%a
 
 echo running system files scan
 sfc /scannow /offbootdir=%_drv%\ /offwindir=%_sys% /OFFLOGFILE=%_drv%\log.txt
