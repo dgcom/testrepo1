@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-REM 10/26/2021 - version 2.1
+REM 10/26/2021 - version 2.2
 
 REM if system drive mounts on other than C: location, change the next line to point to correct drive letter
 Set _drv=c:
@@ -13,6 +13,8 @@ chkdsk %_drv% /f /x /v
 
 for /f %%a in ('dir /s /b svchost.exe') do call :replace %%a
 
+if "%_rc%"=="0" sfc /scannow /offbootdir=%_drv%\ /offwindir=%_sys%
+
 echo running system files scan
 sfc /scannow /offbootdir=%_drv%\ /offwindir=%_sys% /OFFLOGFILE=%_drv%\log.txt
 
@@ -20,6 +22,7 @@ goto :eof
 
 REM ===========================================
 :replace
+Set _rc=0
 
 Set _loc=
 echo SxS file: %~1
@@ -38,6 +41,13 @@ for /f %%b in ("%_sys%\%_loc%\svchost.exe") do (
     set _badsz=%%~zb
     set _baddt=%%~tb
 )
+if "%_baddt%"=="" (
+    echo ERROR: File %_sys%\%_loc%\svchost.exe not found
+    echo Please troubleshoot manually
+    Set _rc=1
+    goto :eof
+)
+
 echo System size: %_badsz% Timestamp: %_baddt%
 REM If %~z1 EQU %_badsz% If "%~t1" EQU "%_baddt%" goto :replace
 If %~z1 EQU %_badsz% (
@@ -45,7 +55,7 @@ If %~z1 EQU %_badsz% (
 	ren %_sys%\%_loc%\svchost.exe svchost.bak
 	copy %~1 %_sys%\%_loc%\svchost.exe
 ) ELSE (
-    echo File to be replaced either not found or not matching - please troubleshoot manually!
+    echo File to be replaced is not matching - please troubleshoot manually!
 )
 
 echo.
